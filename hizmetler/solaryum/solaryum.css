@@ -883,7 +883,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 38%;
+  object-position: center;
 }
 
 .sol-lower-fix .sol-prices .sol-prices-photo::after {
@@ -972,10 +972,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
   .sol-lower-fix .sol-prices .sol-prices-photo {
     height: clamp(148px, 13vw, 190px);
-  }
-
-  .sol-lower-fix .sol-prices .sol-prices-photo img {
-    object-position: center 28%;
   }
 
   .sol-lower-fix .sol-prices .sol-visit {
