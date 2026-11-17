@@ -847,7 +847,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-lower-fix .sol-prices .sol-price-card {
   position: relative;
   margin-top: 14px;
-  padding-block: .25rem;
+  padding-block-end: .25rem;
   border: 1px solid #70577a;
   border-radius: 14px;
   background:
@@ -859,12 +859,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .sol-lower-fix .sol-prices .sol-price-card::before {
   position: absolute;
+  z-index: 1;
   inset: -1px 9% auto 18%;
   height: 1px;
   background: linear-gradient(90deg, transparent, #d69ee2 42%, #f5dcff 72%, transparent);
   box-shadow: 0 2px 10px #db90ef77;
   pointer-events: none;
   content: "";
+}
+
+.sol-lower-fix .sol-prices .sol-price-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 13px 13px 0 0;
 }
 
 .sol-lower-fix .sol-prices .sol-price-card table {
