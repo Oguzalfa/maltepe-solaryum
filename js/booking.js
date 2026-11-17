@@ -14,7 +14,7 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
   if (!options.length) return { dispose() {} };
   const brand = [content?.brand?.name, content?.brand?.descriptor].filter(Boolean).join(' ').trim();
   const infoUrl = new URL(`https://wa.me/${number}`);
-  infoUrl.searchParams.set('text', 'Merhaba, hizmetler hakkında bilgi almak istiyorum.');
+  infoUrl.searchParams.set('text', 'Merhaba, Maltepe Solaryum için randevu bilgisi almak istiyorum.');
   const dialog = doc.createElement('dialog');
   dialog.id = 'sc-booking-dialog';
   dialog.className = 'sc-booking-dialog';
@@ -23,33 +23,44 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
   dialog.innerHTML = `
     <div class="sc-booking-panel">
       <header class="sc-booking-header">
-        <div><p class="sc-booking-eyebrow">SİZE ÖZEL BİR ZAMAN</p><h2 id="sc-booking-title">Randevu talebi</h2></div>
-        <button type="button" class="sc-booking-close" data-booking-close aria-label="Randevu formunu kapat"><span aria-hidden="true">×</span></button>
+        <h2 id="sc-booking-title">Randevu talebi</h2>
+        <button type="button" class="sc-booking-close" data-booking-close aria-label="Randevu penceresini kapat">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
       </header>
-      <p class="sc-booking-intro" id="sc-booking-intro">Tercihlerinizi paylaşın, size uygun zamanı birlikte netleştirelim.</p>
-      <form class="sc-booking-form" data-booking-form novalidate>
-        <fieldset class="sc-booking-services" aria-describedby="sc-booking-services-error">
-          <legend>Hangi hizmetle ilgileniyorsunuz? <span>Birden fazla seçebilirsiniz.</span></legend>
-          <div class="sc-booking-choices" data-booking-choices></div>
-          <p class="sc-booking-error" id="sc-booking-services-error" data-booking-error="services" hidden></p>
-        </fieldset>
-        <div class="sc-booking-fields">
-          <div class="sc-booking-field"><label for="sc-booking-name">Ad Soyad</label><input id="sc-booking-name" name="name" autocomplete="name" maxlength="100" required aria-describedby="sc-booking-name-error"/><p class="sc-booking-error" id="sc-booking-name-error" data-booking-error="name" hidden></p></div>
-          <div class="sc-booking-field"><label for="sc-booking-phone">Telefon</label><input id="sc-booking-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="32" required aria-describedby="sc-booking-phone-error"/><p class="sc-booking-error" id="sc-booking-phone-error" data-booking-error="phone" hidden></p></div>
-          <div class="sc-booking-field"><label for="sc-booking-time">Saat tercihi <span>(isteğe bağlı)</span></label><input id="sc-booking-time" name="time" type="time" aria-describedby="sc-booking-time-error"/><p class="sc-booking-error" id="sc-booking-time-error" data-booking-error="time" hidden></p></div>
-          <div class="sc-booking-field sc-booking-field--note"><label for="sc-booking-note">Notunuz <span>(isteğe bağlı)</span></label><textarea id="sc-booking-note" name="note" rows="3" maxlength="1000" aria-describedby="sc-booking-note-error"></textarea><p class="sc-booking-error" id="sc-booking-note-error" data-booking-error="note" hidden></p></div>
-        </div>
-        <p class="sc-booking-form-alert" role="alert" data-booking-alert hidden></p>
-        <button type="submit" class="sc-booking-submit"><span>WhatsApp taslağını hazırla</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <p class="sc-booking-explanation">Bu form randevu talebi hazırlar. Mesajı WhatsApp’ta siz gönderirsiniz; randevu işletmenin yanıtıyla netleşir. <span data-booking-privacy>Bilgileriniz bu sitede kaydedilmez; WhatsApp mesaj taslağına eklenir.</span></p>
-      </form>
-      <section class="sc-booking-ready" data-booking-ready hidden aria-label="Hazırlanan talep">
-        <p class="sc-booking-ready-title" role="status">Mesajınız hazır.</p>
-        <p>WhatsApp’ta mesajı göndererek talebinizi iletebilirsiniz. Randevunuz işletmenin yanıtıyla netleşir.</p>
-        <a class="sc-booking-submit" data-booking-draft-link target="_blank" rel="noopener noreferrer"><span>Talebimi WhatsApp’ta aç</span><span aria-hidden="true">↗</span></a>
-        <button type="button" class="sc-booking-back" data-booking-back>Bilgilerimi düzenle</button>
-      </section>
-      <footer class="sc-booking-footer"><span>Yalnızca bir sorunuz mu var?</span><a data-booking-info target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6l-4.3 1.2 1.2-4.2A8.6 8.6 0 1 1 20.5 11.7Z" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 7.6c-.8 1.2-.1 3.3 1.7 5.1 1.8 1.8 3.9 2.5 5.1 1.7l.8-.9-2.2-1.3-.8.7c-1.2-.5-2.3-1.6-2.8-2.8l.7-.8-1.3-2.2-1.2.5Z" fill="currentColor"/></svg><span>WhatsApp’tan hemen bilgi al</span><span aria-hidden="true">↗</span></a></footer>
+      <p class="sc-booking-intro" id="sc-booking-intro">Uygun gün ve saati WhatsApp’tan paylaşın.</p>
+      <div class="sc-booking-quick">
+        <a class="sc-booking-quick-wa" data-booking-info target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6l-4.3 1.2 1.2-4.2a8.6 8.6 0 1 1 15.8-4.6Z" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 7.6c-.8 1.2-.1 3.3 1.7 5.1 1.8 1.8 3.3 2.5 4.5 1.7l.8-.9-2.2-1.3-.8.7c-1.2-.5-2.3-1.6-2.8-2.8l.7-.8-1.3-2.2-.9.8Z" fill="currentColor"/></svg>
+          <span>WhatsApp’a geç</span>
+        </a>
+        <a class="sc-booking-quick-call" data-booking-call>Stüdyoyu ara</a>
+      </div>
+      <details class="sc-booking-disclosure" data-booking-disclosure>
+        <summary>Talep formu</summary>
+        <form class="sc-booking-form" data-booking-form novalidate>
+          <fieldset class="sc-booking-services" aria-describedby="sc-booking-services-error">
+            <legend>Hangi hizmetle ilgileniyorsunuz? <span>Birden fazla seçebilirsiniz.</span></legend>
+            <div class="sc-booking-choices" data-booking-choices></div>
+            <p class="sc-booking-error" id="sc-booking-services-error" data-booking-error="services" hidden></p>
+          </fieldset>
+          <div class="sc-booking-fields">
+            <div class="sc-booking-field"><label for="sc-booking-name">Ad Soyad</label><input id="sc-booking-name" name="name" autocomplete="name" maxlength="100" required aria-describedby="sc-booking-name-error"/><p class="sc-booking-error" id="sc-booking-name-error" data-booking-error="name" hidden></p></div>
+            <div class="sc-booking-field"><label for="sc-booking-phone">Telefon</label><input id="sc-booking-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="32" required aria-describedby="sc-booking-phone-error"/><p class="sc-booking-error" id="sc-booking-phone-error" data-booking-error="phone" hidden></p></div>
+            <div class="sc-booking-field"><label for="sc-booking-time">Saat tercihi <span>(isteğe bağlı)</span></label><input id="sc-booking-time" name="time" type="time" aria-describedby="sc-booking-time-error"/><p class="sc-booking-error" id="sc-booking-time-error" data-booking-error="time" hidden></p></div>
+            <div class="sc-booking-field sc-booking-field--note"><label for="sc-booking-note">Notunuz <span>(isteğe bağlı)</span></label><textarea id="sc-booking-note" name="note" rows="3" maxlength="1000" aria-describedby="sc-booking-note-error"></textarea><p class="sc-booking-error" id="sc-booking-note-error" data-booking-error="note" hidden></p></div>
+          </div>
+          <p class="sc-booking-form-alert" role="alert" data-booking-alert hidden></p>
+          <button type="submit" class="sc-booking-submit"><span>WhatsApp taslağını hazırla</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <p class="sc-booking-explanation">Bu form randevu talebi hazırlar. Mesajı WhatsApp’ta siz gönderirsiniz; randevu işletmenin yanıtıyla netleşir. <span data-booking-privacy>Bilgileriniz bu sitede kaydedilmez; WhatsApp mesaj taslağına eklenir.</span></p>
+        </form>
+        <section class="sc-booking-ready" data-booking-ready hidden aria-label="Hazırlanan talep">
+          <p class="sc-booking-ready-title" role="status">Mesajınız hazır.</p>
+          <p>WhatsApp’ta mesajı göndererek talebinizi iletebilirsiniz. Randevunuz işletmenin yanıtıyla netleşir.</p>
+          <a class="sc-booking-submit" data-booking-draft-link target="_blank" rel="noopener noreferrer"><span>Talebimi WhatsApp’ta aç</span><span aria-hidden="true">↗</span></a>
+          <button type="button" class="sc-booking-back" data-booking-back>Bilgilerimi düzenle</button>
+        </section>
+      </details>
     </div>`;
   const choices = dialog.querySelector('[data-booking-choices]');
   options.forEach((service) => {
@@ -66,9 +77,12 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
   });
   const form = dialog.querySelector('[data-booking-form]');
   const ready = dialog.querySelector('[data-booking-ready]');
+  const disclosure = dialog.querySelector('[data-booking-disclosure]');
+  const closeButton = dialog.querySelector('[data-booking-close]');
   const draftLink = dialog.querySelector('[data-booking-draft-link]');
   const alert = dialog.querySelector('[data-booking-alert]');
   dialog.querySelector('[data-booking-info]').href = infoUrl.href;
+  dialog.querySelector('[data-booking-call]').href = `tel:+${number}`;
   doc.body.append(dialog);
   let opener = null;
   let lockedScroll = null;
@@ -109,6 +123,7 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
   }
   function reset() {
     form.reset();
+    disclosure.open = false;
     form.hidden = false;
     ready.hidden = true;
     draftLink.removeAttribute('href');
@@ -117,10 +132,13 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
   }
   function visible(node) {
     if (!(node instanceof win.HTMLElement) || !node.isConnected || !node.getClientRects().length || node.closest('[hidden], [inert]')) return false;
+    const collapsed = node.closest('details:not([open])');
+    if (collapsed && !collapsed.querySelector('summary')?.contains(node)) return false;
     const style = win.getComputedStyle(node);
     return style.visibility !== 'hidden' && style.visibility !== 'collapse';
   }
   function onClose() {
+    if (dialog.open) return;
     unlockScroll();
     reset();
     const fallback = typeof focusFallback === 'function' ? focusFallback() : focusFallback;
@@ -141,7 +159,7 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
       choices.querySelectorAll('input').forEach((checkbox) => { checkbox.checked = checkbox.value === service; });
       dialog.showModal();
       lockScroll();
-      dialog.querySelector('input[name="service"]:checked, input[name="service"]')?.focus({ preventScroll: true });
+      closeButton.focus({ preventScroll: true });
       event.preventDefault();
     } catch {
       if (dialog.open) dialog.close();
@@ -195,11 +213,24 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
     }
   }
   function onCancel(event) { event.preventDefault(); close(); }
+  function onDialogKeydown(event) {
+    if (event.key !== 'Tab' || !dialog.open) return;
+    const targets = [...dialog.querySelectorAll('a[href], button, input, textarea, select, summary, [tabindex]')]
+      .filter((node) => node.tabIndex >= 0 && !node.matches(':disabled') && visible(node));
+    const first = targets[0];
+    const last = targets.at(-1);
+    const active = doc.activeElement;
+    if (!first || (active !== (event.shiftKey ? first : last) && targets.includes(active))) return;
+
+    event.preventDefault();
+    (event.shiftKey ? last : first).focus();
+  }
   root.addEventListener('click', onTrigger);
   form.addEventListener('submit', onSubmit);
   dialog.addEventListener('click', onDialogClick);
   dialog.addEventListener('cancel', onCancel);
   dialog.addEventListener('close', onClose);
+  dialog.addEventListener('keydown', onDialogKeydown);
   const api = { dispose() {
     if (disposed) return;
     disposed = true;
@@ -208,6 +239,7 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
     dialog.removeEventListener('click', onDialogClick);
     dialog.removeEventListener('cancel', onCancel);
     dialog.removeEventListener('close', onClose);
+    dialog.removeEventListener('keydown', onDialogKeydown);
     close();
     onClose();
     dialog.remove();

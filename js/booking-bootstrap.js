@@ -1,7 +1,12 @@
 import { loadSiteContent } from './site-config.js?v=booking1';
-import { initBooking } from './booking.js?v=mobile-audit1';
+import { initBooking } from './booking.js?v=solaryum2';
 
-// Standalone reading/service pages keep their WhatsApp hrefs if config fails.
+// If config or dialog support is unavailable, the page links still work.
 loadSiteContent().then(content => initBooking({
-  root: document, content, focusFallback: () => document.querySelector('.site-header .brand'),
+  root: document,
+  content,
+  focusFallback: () => {
+    const menuButton = document.querySelector('.sol-menu-btn');
+    return menuButton?.getClientRects().length ? menuButton : document.querySelector('.sol-header .sol-brand');
+  },
 })).catch(() => {});
