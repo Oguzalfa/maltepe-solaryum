@@ -25,16 +25,16 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
       <header class="sc-booking-header">
         <h2 id="sc-booking-title">Randevu talebi</h2>
         <button type="button" class="sc-booking-close" data-booking-close aria-label="Randevu penceresini kapat">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="sol-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/solaryum/icons.svg#close"/></svg>
         </button>
       </header>
       <p class="sc-booking-intro" id="sc-booking-intro">Uygun gün ve saati WhatsApp’tan paylaşın.</p>
       <div class="sc-booking-quick">
         <a class="sc-booking-quick-wa" data-booking-info target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.6l-4.3 1.2 1.2-4.2a8.6 8.6 0 1 1 15.8-4.6Z" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 7.6c-.8 1.2-.1 3.3 1.7 5.1 1.8 1.8 3.3 2.5 4.5 1.7l.8-.9-2.2-1.3-.8.7c-1.2-.5-2.3-1.6-2.8-2.8l.7-.8-1.3-2.2-.9.8Z" fill="currentColor"/></svg>
+          <svg class="sol-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/solaryum/icons.svg#whatsapp"/></svg>
           <span>WhatsApp’a geç</span>
         </a>
-        <a class="sc-booking-quick-call" data-booking-call>Stüdyoyu ara</a>
+        <a class="sc-booking-quick-call" data-booking-call><svg class="sol-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/solaryum/icons.svg#phone"/></svg><span>Stüdyoyu ara</span></a>
       </div>
       <details class="sc-booking-disclosure" data-booking-disclosure>
         <summary>Talep formu</summary>
@@ -51,13 +51,13 @@ export function initBooking({ root = document, content, onBeforeOpen = () => {},
             <div class="sc-booking-field sc-booking-field--note"><label for="sc-booking-note">Notunuz <span>(isteğe bağlı)</span></label><textarea id="sc-booking-note" name="note" rows="3" maxlength="1000" aria-describedby="sc-booking-note-error"></textarea><p class="sc-booking-error" id="sc-booking-note-error" data-booking-error="note" hidden></p></div>
           </div>
           <p class="sc-booking-form-alert" role="alert" data-booking-alert hidden></p>
-          <button type="submit" class="sc-booking-submit"><span>WhatsApp taslağını hazırla</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="submit" class="sc-booking-submit"><span>WhatsApp taslağını hazırla</span><svg class="sol-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/solaryum/icons.svg#arrow"/></svg></button>
           <p class="sc-booking-explanation">Bu form randevu talebi hazırlar. Mesajı WhatsApp’ta siz gönderirsiniz; randevu işletmenin yanıtıyla netleşir. <span data-booking-privacy>Bilgileriniz bu sitede kaydedilmez; WhatsApp mesaj taslağına eklenir.</span></p>
         </form>
         <section class="sc-booking-ready" data-booking-ready hidden aria-label="Hazırlanan talep">
           <p class="sc-booking-ready-title" role="status">Mesajınız hazır.</p>
           <p>WhatsApp’ta mesajı göndererek talebinizi iletebilirsiniz. Randevunuz işletmenin yanıtıyla netleşir.</p>
-          <a class="sc-booking-submit" data-booking-draft-link target="_blank" rel="noopener noreferrer"><span>Talebimi WhatsApp’ta aç</span><span aria-hidden="true">↗</span></a>
+          <a class="sc-booking-submit" data-booking-draft-link target="_blank" rel="noopener noreferrer"><svg class="sol-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="/assets/solaryum/icons.svg#whatsapp"/></svg><span>Talebimi WhatsApp’ta aç</span></a>
           <button type="button" class="sc-booking-back" data-booking-back>Bilgilerimi düzenle</button>
         </section>
       </details>

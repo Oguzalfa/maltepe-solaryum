@@ -1,5 +1,5 @@
 import { loadSiteContent } from './site-config.js?v=booking1';
-import { initBooking } from './booking.js?v=solaryum2';
+import { initBooking } from './booking.js?v=solaryum3';
 
 // If config or dialog support is unavailable, the page links still work.
 loadSiteContent().then(content => initBooking({

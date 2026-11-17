@@ -86,7 +86,12 @@ html.sc-booking-open .sol-dock {
   cursor: pointer;
 }
 
-.sc-booking-close svg { width: 20px; height: 20px; }
+.sc-booking-dialog .sol-control-icon {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
 
 .sc-booking-intro {
   max-width: 29ch;
@@ -108,28 +113,42 @@ html.sc-booking-open .sol-dock {
   padding: 10px 14px;
   border: 1px solid var(--action-edge, #ac8db4);
   border-radius: var(--action-radius, 10px);
-  background: var(--action-fill, #e7d8ed);
+  background: var(--action-primary, var(--action-fill, #e7d8ed));
   color: var(--action-ink, #22122c);
+  box-shadow: var(--action-inner, inset 0 1px 0 #fff6);
   font: var(--type-control, 600 .9375rem/1.25 var(--sans, "Sol Manrope", Arial, sans-serif));
   text-align: center;
   text-decoration: none;
   overflow-wrap: anywhere;
 }
 
-.sc-booking-quick-wa { justify-content: center; }
-
-.sc-booking-quick-wa svg { flex: none; width: 20px; height: 20px; }
+.sc-booking-quick-wa,
+.sc-booking-submit[data-booking-draft-link] {
+  justify-content: center;
+  text-align: center;
+}
 
 .sc-booking-quick-call {
   justify-self: center;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   min-height: 44px;
   padding: 0 9px;
   color: var(--sheet-ink);
   font: var(--type-control, 600 .9375rem/1.25 var(--sans, "Sol Manrope", Arial, sans-serif));
+  text-decoration: none;
+}
+
+.sc-booking-quick-call span {
   text-decoration: underline;
   text-underline-offset: 5px;
+}
+
+.sc-booking-dialog .sc-booking-quick-call .sol-control-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .sc-booking-disclosure { margin-top: 8px; }
@@ -237,7 +256,6 @@ html.sc-booking-open .sol-dock {
   cursor: pointer;
 }
 
-.sc-booking-submit svg { flex: none; width: 20px; height: 20px; }
 .sc-booking-explanation, .sc-booking-ready p { margin: 0; color: var(--sheet-muted); font-size: 13px; }
 .sc-booking-explanation [data-booking-privacy] { display: block; margin-top: 6px; }
 
@@ -267,11 +285,15 @@ html.sc-booking-open .sol-dock {
 
 @media (hover: hover) {
   .sc-booking-close:hover { background: #f6c7fa22; }
-  .sc-booking-quick-wa:hover, .sc-booking-submit:hover { background: #f1e4f5; }
-  .sc-booking-disclosure summary:hover { color: var(--sheet-ink); }
+  .sc-booking-quick-wa:hover, .sc-booking-submit:hover { filter: brightness(1.035); }
+  .sc-booking-quick-call:hover, .sc-booking-disclosure summary:hover { color: var(--sheet-primary); }
 }
 
-.sc-booking-quick-wa:active, .sc-booking-submit:active { background: #d8c3e0; }
+.sc-booking-quick-wa:active, .sc-booking-submit:active { filter: brightness(.96); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sc-booking-quick-wa, .sc-booking-submit { transition: filter 140ms ease; }
+}
 
 @media (max-width: 959px) {
   html.sc-booking-open { scrollbar-gutter: auto; }
