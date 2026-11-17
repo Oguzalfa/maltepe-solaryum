@@ -830,9 +830,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .sol-prices {
-  --price-edge: #a084ae;
   --price-muted: #dbc3e3;
-  --price-rule: #6d4f797a;
+  --price-rule: #cfacd440;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 23px;
@@ -847,47 +846,25 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .sol-lower-fix .sol-prices .sol-price-card {
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
   margin-top: 14px;
-  padding: 0;
-  border: 1px solid #695373;
-  border-radius: 17px;
-  background: #261731;
-  box-shadow: inset 0 -1px 0 #130b18, 0 13px 38px #10081952;
+  padding-block: .25rem;
+  border: 1px solid #70577a;
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 74% 0%, #8b469831, transparent 62%),
+    #23162c;
+  box-shadow: 0 10px 34px #10081954;
   color: #fff5fc;
 }
 
 .sol-lower-fix .sol-prices .sol-price-card::before {
   position: absolute;
-  z-index: 1;
-  inset: 0 0 auto;
-  height: 2px;
-  background: linear-gradient(90deg, #796581, #eaddf0 37%, var(--price-edge) 65%, #796581);
+  inset: -1px 9% auto 18%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d69ee2 42%, #f5dcff 72%, transparent);
+  box-shadow: 0 2px 10px #db90ef77;
   pointer-events: none;
   content: "";
-}
-
-.sol-lower-fix .sol-prices .sol-prices-photo {
-  min-width: 0;
-  height: clamp(6.25rem, 30vw, 10rem);
-  margin: 0;
-  border-radius: 0;
-  border-bottom: 1px solid #87718d;
-  overflow: hidden;
-  background: #170e20;
-}
-
-.sol-lower-fix .sol-prices .sol-prices-photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.sol-lower-fix .sol-prices .sol-prices-photo::after {
-  content: none;
 }
 
 .sol-lower-fix .sol-prices .sol-price-card table {
@@ -904,7 +881,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .sol-lower-fix .sol-prices .sol-price-card th,
 .sol-lower-fix .sol-prices .sol-price-card td {
-  padding-block: 13px;
+  padding-block: 1rem;
   border: 0;
   vertical-align: middle;
   line-height: 1.15;
@@ -922,7 +899,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   width: 1%;
   text-align: end;
   white-space: nowrap;
-  font-size: clamp(1.25rem, 5vw, 1.8125rem);
+  font-size: clamp(1.375rem, 5.8vw, 1.8125rem);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: -.025em;
@@ -968,10 +945,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .sol-lower-fix .sol-prices {
     grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr);
     gap: 34px clamp(35px, 6vw, 86px);
-  }
-
-  .sol-lower-fix .sol-prices .sol-prices-photo {
-    height: clamp(148px, 13vw, 190px);
   }
 
   .sol-lower-fix .sol-prices .sol-visit {
