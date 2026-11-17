@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://maltepe-solaryum.vercel.app/sitemap.xml
+Sitemap: https://maltepesolaryum.com/sitemap.xml
