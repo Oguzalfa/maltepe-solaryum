@@ -1,0 +1,9 @@
+{
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "",
+  "trailingSlash": true,
+  "rewrites": [
+    { "source": "/", "destination": "/hizmetler/solaryum/index.html" }
+  ]
+}

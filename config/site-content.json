@@ -1,0 +1,57 @@
+{
+  "brand": {
+    "name": "Şükrü Çankırılı",
+    "descriptor": "Güzellik Merkezi"
+  },
+  "whatsapp": {
+    "phoneInternationalDigits": "905356276563",
+    "message": "Merhaba, randevu ve hizmetler hakkında bilgi almak istiyorum."
+  },
+  "contact": {
+    "addressLines": [
+      "Altayçeşme Mahallesi",
+      "Atatürk Caddesi No:41/179",
+      "Maltepe / İstanbul"
+    ],
+    "postalCode": "34843",
+    "mapQuery": "Altayçeşme Mahallesi, Atatürk Caddesi No:41/179, Maltepe / İstanbul",
+    "phoneInternationalDigits": "905356276563",
+    "phoneTel": "tel:+905356276563",
+    "phoneLabel": "0535 627 65 63",
+    "instagram": "https://www.instagram.com/sukrucankiriliguzellik/",
+    "instagramLabel": "@sukrucankiriliguzellik",
+    "googleProfile": "https://share.google/f3V7kNUt7oKOX5JkN"
+  },
+  "services": [
+    {
+      "id": "protez-tirnak",
+      "title": "Protez Tırnak",
+      "navigation": "external",
+      "url": "https://www.maltepeproteztirnak.com/",
+      "cta": "Uzmanlık sitesine git"
+    },
+    {
+      "id": "ipek-kirpik",
+      "title": "İpek Kirpik",
+      "navigation": "external",
+      "url": "https://www.maltepeipekkirpik.com/",
+      "cta": "Kirpik lifting sayfasına git"
+    },
+    {
+      "id": "solaryum",
+      "title": "Solaryum",
+      "navigation": "internal",
+      "anchor": "#solaryum",
+      "cta": "Uygulama hakkında bilgi alın",
+      "summary": "Uygulama süreci ve seans bilgisi için iletişime geçebilirsiniz."
+    },
+    {
+      "id": "kalici-makyaj",
+      "title": "Kalıcı Makyaj",
+      "navigation": "internal",
+      "anchor": "#kalici-makyaj",
+      "cta": "Detayları keşfet",
+      "summary": "Kaş, dudak ve eyeliner uygulamaları."
+    }
+  ]
+}
