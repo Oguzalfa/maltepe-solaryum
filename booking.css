@@ -30,6 +30,7 @@ html.sc-booking-open .sol-dock {
   font: 400 16px/1.5 var(--sans, "Sol Manrope", Arial, sans-serif);
   overflow: auto;
   overscroll-behavior: contain;
+  scroll-padding-block: 12px 24px;
   box-shadow: 0 26px 90px #100416c9;
 }
 
@@ -72,7 +73,7 @@ html.sc-booking-open .sol-dock {
 .sc-booking-close {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: max(10px, env(safe-area-inset-right, 0px));
   display: grid;
   place-items: center;
   width: 44px;
@@ -106,7 +107,7 @@ html.sc-booking-open .sol-dock {
   padding: 11px 15px;
   border: 1px solid #edc4ff;
   border-radius: 999px;
-  background: linear-gradient(180deg, #f5cdfa 0%, #db9df1 72%, #e6b6f7 100%);
+  background: var(--lilac-sheen, linear-gradient(180deg, #f5cdfa, #db9df1 72%, #e6b6f7));
   color: #190d20;
   text-align: center;
   text-decoration: none;
@@ -285,7 +286,10 @@ html.sc-booking-open .sol-dock {
 
   .sc-booking-panel {
     min-height: min(380px, calc(100dvh - 12px));
-    padding: 57px clamp(20px, 7vw, 32px) calc(24px + env(safe-area-inset-bottom));
+    --sheet-gutter: clamp(20px, 7vw, 32px);
+    padding: 57px max(var(--sheet-gutter), env(safe-area-inset-right, 0px))
+      calc(24px + env(safe-area-inset-bottom, 0px))
+      max(var(--sheet-gutter), env(safe-area-inset-left, 0px));
   }
 }
 
@@ -295,6 +299,9 @@ html.sc-booking-open .sol-dock {
 }
 
 @media (max-height: 480px) and (max-width: 959px) {
-  .sc-booking-panel { min-height: 0; padding-top: 46px; }
-  .sc-booking-intro { margin-bottom: 14px; }
+  .sc-booking-panel { min-height: 0; padding-top: 37px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .sc-booking-panel::before { top: 12px; }
+  .sc-booking-header h2 { font-size: 34px; }
+  .sc-booking-intro { max-width: none; margin-block: 7px 12px; font-size: 17px; }
+  .sc-booking-quick-wa { min-height: 49px; }
 }

@@ -90,19 +90,27 @@
   --body: #f6ecfa;
   --muted: #dfcee7;
   --cta: #ebb3f9;
-  --lilac-sheen: linear-gradient(180deg, #f4ceff, #e3a7f8 59%, #bf70e7);
+  --lilac-sheen:
+    radial-gradient(ellipse at 50% 0%, #fff0ffb8, transparent 68%),
+    linear-gradient(180deg, #f2c6ff, #e4a7fa 55%, #c677eb);
   --cta-ink: #25112f;
   --line: #936eab;
   --focus: #f0ccff;
-  --header: 64px;
+  --header: calc(64px + env(safe-area-inset-top, 0px));
   --dock: 67px;
   --gutter: clamp(18px, 5.7vw, 26px);
+  --safe-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  --safe-right: max(var(--gutter), env(safe-area-inset-right, 0px));
   --sans: "Sol Manrope", Manrope, "Segoe UI", sans-serif;
   --serif: "Sol Cormorant", Georgia, serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header) + 8px); scroll-padding-bottom: calc(var(--dock) + 12px); }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header) + 8px);
+  scroll-padding-bottom: calc(var(--dock) + env(safe-area-inset-bottom, 0px) + 12px);
+}
 body.sol-page {
   margin: 0;
   background:
@@ -154,7 +162,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   justify-content: space-between;
   gap: 12px;
   min-height: var(--header);
-  padding: max(7px, env(safe-area-inset-top)) var(--gutter) 7px;
+  padding: calc(7px + env(safe-area-inset-top, 0px)) var(--safe-right) 7px var(--safe-left);
   background: rgba(19, 7, 24, .96);
   backdrop-filter: blur(16px);
 }
@@ -216,7 +224,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: absolute;
   inset: 100% 0 auto;
   flex-direction: column;
-  padding: 8px var(--gutter) 16px;
+  flex-wrap: nowrap;
+  max-height: calc(100vh - var(--header) - var(--dock));
+  max-height: calc(100dvh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px));
+  padding: 8px var(--safe-right) 12px var(--safe-left);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: #18091e;
   border-bottom: 1px solid #9a50a3;
 }
@@ -225,6 +238,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   display: flex;
   align-items: center;
   min-height: 44px;
+  flex-shrink: 0;
   text-decoration: none;
   color: var(--body);
   font-size: 15px;
@@ -233,11 +247,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   html:not(.sol-ready) .sol-header { position: relative; display: block; }
 }
 
-.sol-section { padding-inline: var(--gutter); }
+.sol-section { padding-inline: var(--safe-left) var(--safe-right); }
 .sol-hero {
   position: relative;
   display: grid;
-  grid-template: "scene";
+  grid-template: "scene" / minmax(0, 1fr);
   isolation: isolate;
   overflow: clip;
   background:
@@ -249,7 +263,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: relative;
   z-index: 1;
   align-self: start;
-  padding: clamp(28px, 9vw, 42px) var(--gutter) 0;
+  padding: clamp(28px, 9vw, 42px) var(--safe-right) 0 var(--safe-left);
   pointer-events: none;
 }
 .sol-kicker { color: var(--muted); font-size: 13px; }
@@ -293,8 +307,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  height: clamp(534px, 171vw, 735px);
-  padding: 0 var(--gutter) 17px;
+  height: clamp(524px, 155vw, 735px);
+  padding: 0 var(--safe-right) 26px var(--safe-left);
 }
 .sol-frame {
   position: absolute;
@@ -318,7 +332,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   height: 65%;
   object-fit: cover;
   object-position: 58% center;
-  mask-image: linear-gradient(transparent, #000 19%, #000 76%, transparent);
+  mask-image: linear-gradient(transparent, #000 14%, #000 82%, transparent);
 }
 .sol-frame::after {
   position: absolute;
@@ -326,22 +340,22 @@ button, a { -webkit-tap-highlight-color: transparent; }
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, #140719 0%, transparent 19%, transparent 75%, #200b27 98%),
+    linear-gradient(180deg, #140719 0%, transparent 19%, transparent 81%, #200b27 100%),
     radial-gradient(ellipse at 18% 10%, #140719 0, transparent 56%);
 }
 .sol-frame.is-detail::after {
-  background: linear-gradient(180deg, #16081c 6%, transparent 57%, transparent 70%, #200b27 98%);
+  background: linear-gradient(180deg, #16081c 6%, transparent 50%, transparent 80%, #200b27 100%);
 }
 .sol-switch {
   position: relative;
   display: grid;
-  grid-template-columns: 1.13fr .94fr;
+  grid-template-columns: minmax(0, 1.13fr) minmax(0, .94fr);
   width: min(100%, 330px);
   min-height: 46px;
   border: 1px solid #efa6fa;
   border-radius: 999px;
   background: rgba(25, 7, 32, .69);
-  box-shadow: 0 0 18px rgba(223, 127, 241, .16);
+  box-shadow: 0 0 18px rgba(223, 127, 241, .25);
 }
 .sol-switch button, .sol-line-btn, .sol-dock a, .whatsapp-link, .sol-nav-cta {
   min-height: 48px;
@@ -364,13 +378,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-weight: 700;
 }
 .sol-ready .sol-nav .sol-nav-cta { justify-content: center; }
-.sol-concept {
-  position: relative;
-  margin-top: 7px;
-  color: var(--muted);
-  font: italic 13px/1.3 var(--sans);
-  text-align: center;
-}
 .sol-fallback {
   position: absolute;
   z-index: 1;
@@ -397,7 +404,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   cursor: pointer;
 }
 
-.sol-section { margin-top: 36px; scroll-margin-top: calc(var(--header) + 8px); }
+.sol-section { margin-top: 36px; }
 .sol-section h2 {
   font-family: var(--serif);
   font-size: clamp(34px, 9vw, 44px);
@@ -516,7 +523,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   display: flex;
   flex-wrap: wrap;
   gap: 8px 18px;
-  padding: 28px var(--gutter) 12px;
+  padding: 28px var(--safe-right) 12px var(--safe-left);
 }
 .site-footer a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; color: var(--muted); font-size: 14px; }
 
@@ -537,6 +544,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  padding: 5px 8px;
+  text-align: center;
   text-decoration: none;
 }
 .sol-dock-prices { flex: 0 1 44%; border: 1.5px solid #f8e3ff; color: var(--text); background: rgba(32, 11, 39, .68); }
@@ -551,10 +561,37 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .sol-frame picture img { max-height: 680px; object-fit: cover; object-position: 50% 73%; }
 }
 
+@media (max-width: 479px) and (max-height: 740px) and (orientation: portrait) {
+  .sol-stage {
+    height: min(clamp(466px, 155vw, 610px), max(420px, calc(100svh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px))));
+    padding-bottom: 12px;
+  }
+  .sol-frame picture { top: clamp(14px, calc(100svh - 555px), 61px); }
+}
+
+@media (orientation: landscape) and (max-width: 959px) and (max-height: 500px) {
+  .sol-hero-copy { align-self: center; padding-top: 0; padding-bottom: 60px; }
+  .sol-hero h1 { font-size: clamp(39px, 7vw, 66px); }
+  .service-lead { font-size: 18px; }
+  .sol-stage {
+    height: clamp(296px, 85svh, 410px);
+    align-items: flex-end;
+    padding-bottom: 15px;
+  }
+  .sol-frame picture { top: auto; bottom: -8vw; left: auto; right: 0; width: 68%; }
+  .sol-frame picture img { max-height: none; }
+  .sol-frame > img { top: 0; left: auto; right: 0; width: 69%; height: 100%; mask-image: none; }
+  .sol-frame::after, .sol-frame.is-detail::after {
+    background: linear-gradient(90deg, #17091d 21%, #17091de1 34%, transparent 54%),
+      linear-gradient(0deg, #200b27 1%, transparent 31%);
+  }
+  .sol-switch { width: min(55%, 330px); }
+}
+
 @media (min-width: 960px) {
-  :root { --dock: 0px; --gutter: clamp(44px, 6vw, 108px); --header: 72px; }
+  :root { --dock: 0px; --gutter: clamp(44px, 6vw, 108px); --header: calc(72px + env(safe-area-inset-top, 0px)); }
   body.sol-page { padding-bottom: 32px; }
-  .sol-header { padding-inline: var(--gutter); }
+  .sol-header { padding-inline: var(--safe-left) var(--safe-right); }
   .sol-brand { font-size: clamp(19px, 2vw, 27px); }
   .sol-ready .sol-menu-btn { display: none; }
   .sol-nav, .sol-ready .sol-nav, .sol-ready .sol-nav.is-open {
@@ -564,6 +601,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
     align-items: center;
     gap: clamp(11px, 1.7vw, 28px);
     padding: 0;
+    max-height: none;
+    overflow: visible;
     border: 0;
     background: transparent;
   }
@@ -580,7 +619,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
     background: linear-gradient(90deg, #17091d 4%, #17091d 26%, rgba(23, 9, 29, .74) 38%, transparent 62%),
       linear-gradient(0deg, #200b27 1%, transparent 32%);
   }
-  .sol-concept, .sol-view-error { width: min(100%, 330px); }
+  .sol-view-error { width: min(100%, 330px); }
   .sol-dock { display: none; }
   .site-footer { max-width: 1480px; margin-inline: auto; }
 }
@@ -606,7 +645,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-lower-fix .sol-section {
   min-width: 0;
   margin-top: 0;
-  padding: 24px var(--gutter) 0;
+  padding: 24px var(--safe-right) 0 var(--safe-left);
 }
 
 .sol-lower-fix .sol-section h2 {
@@ -635,7 +674,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: relative;
   min-width: 0;
   height: clamp(166px, 53vw, 361px);
-  margin-inline: calc(var(--gutter) * -1);
+  margin-inline: calc(var(--safe-left) * -1) calc(var(--safe-right) * -1);
   overflow: hidden;
 }
 
@@ -651,7 +690,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, var(--bg) 0%, transparent 21%, transparent 73%, var(--bg) 100%);
+  background: linear-gradient(180deg, var(--bg) 0%, transparent 15%, transparent 83%, var(--bg) 100%);
   content: "";
 }
 
@@ -667,7 +706,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border: 1px solid #f8d8ffd2;
   border-radius: 16px;
   background:
-    radial-gradient(70% 12% at 45% 0%, #fff2ff96, transparent 100%),
+    radial-gradient(70% 12% at 45% 0%, #fff2ffce, transparent 100%),
     linear-gradient(160deg, #f1cffa 0%, #e7acef 57%, #d791e9 100%);
   box-shadow: inset 0 1px 0 #fff8ff82, 0 13px 31px #11071577;
   color: #24102d;
@@ -708,7 +747,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-lower-fix .sol-price-note {
   margin-top: 9px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .sol-lower-fix .sol-price-note a {
@@ -867,7 +906,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .article-contact .whatsapp-link {
-  background: linear-gradient(170deg, #f1cefc, #cf83e7);
+  background: var(--lilac-sheen);
   color: #21102a;
   box-shadow: inset 0 1px 0 #fff9;
 }

@@ -1,5 +1,6 @@
 const menuButton = document.querySelector(".sol-menu-btn");
 const nav = document.querySelector(".sol-nav");
+const header = menuButton?.closest(".sol-header");
 const menuLabel = menuButton?.querySelector("[data-sol-menu-label]");
 const desktop = window.matchMedia("(min-width: 960px)");
 
@@ -16,6 +17,9 @@ menuButton?.addEventListener("click", () => {
 });
 nav?.addEventListener("click", (event) => {
   if (!desktop.matches && event.target.closest("a")) setMenu(false, true);
+});
+document.addEventListener("click", (event) => {
+  if (menuButton?.getAttribute("aria-expanded") === "true" && !header.contains(event.target)) setMenu(false);
 });
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true" &&
