@@ -84,16 +84,17 @@
   --bg: #200b27;
   --bg-2: #241231;
   --panel: #2c153a;
-  --lilac: #e8c7f5;
-  --ink: #21112a;
   --text: #fff7fd;
   --body: #f6ecfa;
   --muted: #dfcee7;
   --cta: #ebb3f9;
-  --lilac-sheen:
-    radial-gradient(ellipse at 50% 0%, #fff0ffb8, transparent 68%),
-    linear-gradient(180deg, #f2c6ff, #e4a7fa 55%, #c677eb);
-  --cta-ink: #25112f;
+  --action-fill: #e7d8ed;
+  --action-ink: #22122c;
+  --action-edge: #ac8db4;
+  --action-radius: 10px;
+  --action-surface: #25172e;
+  --type-control: 600 .9375rem/1.25 var(--sans);
+  --type-note: 500 .8125rem/1.5 var(--sans);
   --line: #936eab;
   --focus: #f0ccff;
   --header: calc(64px + env(safe-area-inset-top, 0px));
@@ -118,8 +119,8 @@ body.sol-page {
     var(--bg);
   color: var(--body);
   font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 1rem;
+  line-height: 1.6;
   padding-bottom: calc(var(--dock) + env(safe-area-inset-bottom));
 }
 img { max-width: 100%; height: auto; }
@@ -146,9 +147,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   z-index: 30;
   transform: translateY(-160%);
   padding: 12px 16px;
-  border-radius: 999px;
-  background: var(--cta);
-  color: var(--cta-ink);
+  border-radius: var(--action-radius);
+  background: var(--action-fill);
+  color: var(--action-ink);
   text-decoration: none;
 }
 .sol-skip:focus { transform: none; }
@@ -173,14 +174,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
   right: 5%;
   bottom: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ac4cac 29%, #ffc6ff 50%, #ac4cac 71%, transparent);
-  box-shadow: 0 0 9px #e875e8;
+  background: linear-gradient(90deg, transparent, #995e9e 29%, #ebaded 50%, #995e9e 71%, transparent);
   pointer-events: none;
 }
 .sol-brand {
-  font-size: clamp(18px, 5.65vw, 26px);
-  font-weight: 700;
-  letter-spacing: -.055em;
+  font-size: clamp(1.125rem, 5.25vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -.035em;
   line-height: 1.17;
   text-decoration: none;
   white-space: nowrap;
@@ -201,7 +201,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-ready .sol-menu-btn { display: grid; }
 .sol-menu-icon, .sol-menu-icon::before, .sol-menu-icon::after {
   display: block;
-  width: 26px;
+  width: 24px;
   height: 1.5px;
   background: currentColor;
   border-radius: 2px;
@@ -212,8 +212,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   position: absolute;
   left: 0;
 }
-.sol-menu-icon::before { top: -8px; }
-.sol-menu-icon::after { top: 8px; }
+.sol-menu-icon::before { top: -7px; }
+.sol-menu-icon::after { top: 7px; }
 .sol-nav {
   display: flex;
   flex-wrap: wrap;
@@ -241,7 +241,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   flex-shrink: 0;
   text-decoration: none;
   color: var(--body);
-  font-size: 15px;
+  font-size: .875rem;
+  font-weight: 500;
 }
 @media (max-width: 959px) {
   html:not(.sol-ready) .sol-header { position: relative; display: block; }
@@ -249,6 +250,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .sol-section { padding-inline: var(--safe-left) var(--safe-right); }
 .sol-hero {
+  --scene-height: clamp(31rem, 148vw, 45rem);
+  --scene-travel: clamp(13.125rem, 46svh, 23.125rem);
+  position: relative;
+}
+
+.sol-hero.is-cinematic {
+  min-height: calc(var(--scene-height) + var(--scene-travel));
+}
+
+.sol-hero-scene {
   position: relative;
   display: grid;
   grid-template: "scene" / minmax(0, 1fr);
@@ -258,6 +269,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
     radial-gradient(ellipse at 67% 16%, #2d0c31 0, transparent 44%),
     linear-gradient(180deg, #140719 22%, #250e2b 79%, #200b27);
 }
+.is-cinematic .sol-hero-scene {
+  position: sticky;
+  top: calc(var(--header) + min(0px, 100svh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px) - var(--scene-height)));
+}
+
 .sol-hero-copy {
   grid-area: scene;
   position: relative;
@@ -266,16 +282,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   padding: clamp(28px, 9vw, 42px) var(--safe-right) 0 var(--safe-left);
   pointer-events: none;
 }
-.sol-kicker { color: var(--muted); font-size: 13px; }
-.sol-hero h1, .sol-section h2 {
-  color: var(--text);
-  font-weight: 500;
-  letter-spacing: -.035em;
-}
+.sol-hero h1, .sol-section h2 { color: var(--text); }
 .sol-hero h1 {
-  font-size: clamp(42px, 14.6vw, 70px);
+  font-size: clamp(2.625rem, 14.4vw, 4.375rem);
   font-weight: 700;
-  letter-spacing: -.065em;
+  letter-spacing: -.052em;
   line-height: .95;
 }
 .sol-hero h1 em {
@@ -287,37 +298,31 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-style: italic;
   font-weight: 500;
   font-size: 1.22em;
-  letter-spacing: -.044em;
-  line-height: .96;
+  letter-spacing: -.035em;
+  line-height: .99;
   color: #edb6fc;
   text-shadow: 0 6px 35px #100719;
 }
 .service-lead {
   max-width: 34em;
-  margin-top: 9px;
-  color: var(--text);
-  font-size: clamp(17px, 5.7vw, 24px);
+  margin-top: 12px;
+  color: var(--body);
+  font-size: clamp(1rem, 4.8vw, 1.3125rem);
   font-weight: 500;
-  line-height: 1.35;
+  letter-spacing: -.012em;
+  line-height: 1.4;
 }
 .sol-stage {
   grid-area: scene;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: clamp(524px, 155vw, 735px);
-  padding: 0 var(--safe-right) 26px var(--safe-left);
+  height: var(--scene-height);
 }
 .sol-frame {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  touch-action: pan-y pinch-zoom;
   isolation: isolate;
 }
-.sol-frame [hidden], .sol-stage [hidden] { display: none !important; }
 .sol-frame picture, .sol-frame > img {
   position: absolute;
   display: block;
@@ -331,8 +336,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .sol-frame picture img { mask-image: linear-gradient(180deg, transparent, #000 20%); }
 }
 .sol-frame > img {
-  top: 29%;
-  height: 65%;
+  opacity: 0;
+  top: 12%;
+  height: 88%;
   object-fit: cover;
   object-position: 58% center;
   mask-image: linear-gradient(transparent, #000 14%, #000 82%, transparent);
@@ -346,110 +352,66 @@ button, a { -webkit-tap-highlight-color: transparent; }
     linear-gradient(180deg, #140719 0%, transparent 19%, transparent 81%, #200b27 100%),
     radial-gradient(ellipse at 18% 10%, #140719 0, transparent 56%);
 }
-.sol-frame.is-detail::after {
-  background: linear-gradient(180deg, #16081c 6%, transparent 50%, transparent 80%, #200b27 100%);
+.is-cinematic .sol-hero-copy {
+  opacity: calc(1 - var(--scene-blend, 0));
+  transform: translateY(calc(-1.5rem * var(--scene-blend, 0)));
 }
-.sol-switch {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.13fr) minmax(0, .94fr);
-  width: min(100%, 330px);
-  min-height: 46px;
-  border: 1px solid #efa6fa;
-  border-radius: 999px;
-  background: rgba(25, 7, 32, .69);
-  box-shadow: 0 0 18px rgba(223, 127, 241, .25);
+
+.is-cinematic .sol-frame-overview {
+  opacity: calc(1 - var(--scene-blend, 0));
+  transform: scale(calc(1 + .025 * var(--scene-blend, 0)));
 }
-.sol-switch button, .sol-line-btn, .sol-dock a, .whatsapp-link, .sol-nav-cta {
+
+.is-cinematic .sol-frame-detail {
+  opacity: var(--scene-blend, 0);
+  transform: scale(calc(1.045 - .045 * var(--scene-blend, 0)));
+}
+
+.sol-line-btn, .sol-dock a, .whatsapp-link, .sol-nav .sol-nav-cta {
   min-height: 48px;
-  border-radius: 999px;
-  font: 600 15px/1.15 var(--sans);
+  border: 1px solid var(--action-edge);
+  border-radius: var(--action-radius);
+  font: var(--type-control);
+  text-decoration: none;
 }
-.sol-switch button {
-  min-height: 44px;
-  padding: 4px 8px;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  white-space: nowrap;
-  cursor: pointer;
+
+.sol-dock .sol-dock-book, .sol-nav .sol-nav-cta, .whatsapp-link {
+  justify-content: center;
+  gap: .625rem;
+  background: var(--action-fill);
+  color: var(--action-ink);
 }
-.sol-switch button[aria-pressed="true"], .sol-dock-book, .sol-ready .sol-nav .sol-nav-cta {
-  background: var(--lilac-sheen);
-  color: var(--cta-ink);
-  box-shadow: inset 0 1px 0 #f9dcff;
-  font-weight: 700;
+
+.sol-nav .sol-nav-cta { padding-inline: 1rem; }
+
+.sol-action-arrow {
+  flex: none;
+  width: .9375rem;
+  height: .9375rem;
 }
-.sol-ready .sol-nav .sol-nav-cta { justify-content: center; }
-.sol-fallback {
-  position: absolute;
-  z-index: 1;
-  left: var(--gutter);
-  right: var(--gutter);
-  top: 55%;
-  text-align: center;
-  color: var(--muted);
-}
-.sol-view-error {
-  position: relative;
-  margin-top: 8px;
-  color: var(--text);
-  font-size: 13px;
-  text-align: center;
-}
-.sol-view-error button {
-  min-height: 44px;
-  padding-inline: 12px;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  text-decoration: underline;
-  cursor: pointer;
+
+@media (hover: hover) {
+  .sol-nav .sol-nav-cta:hover, .sol-dock .sol-dock-book:hover, .whatsapp-link:hover {
+    background: #fff1fa;
+    border-color: #f3e1f3;
+  }
+
+  .sol-dock .sol-dock-prices:hover, .sol-line-btn:hover {
+    background: var(--action-surface);
+    border-color: #dcc0e0;
+  }
 }
 
 .sol-section { margin-top: 36px; }
 .sol-section h2 {
   font-family: var(--serif);
-  font-size: clamp(34px, 9vw, 44px);
+  font-size: clamp(2.125rem, 9vw, 2.75rem);
   font-weight: 500;
   font-style: italic;
-  line-height: 1.02;
+  letter-spacing: -.025em;
+  line-height: 1.06;
 }
 .sol-studio p { margin-top: 12px; max-width: 38em; color: var(--body); }
-.sol-text-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: 8px;
-  color: var(--cta);
-  text-underline-offset: 4px;
-}
-.sol-text-link--dark { color: var(--ink); }
-
-.sol-price-card, .sol-visit {
-  margin-top: 16px;
-  padding: 22px 18px;
-  border-radius: 20px;
-}
-.sol-price-card { background: var(--lilac); color: var(--ink); }
-.sol-price-card h2, .sol-visit h2 { color: inherit; }
-.sol-price-card table { width: 100%; border-collapse: collapse; margin-top: 16px; table-layout: fixed; }
-.sol-price-card th { width: 68%; }
-.sol-price-card td { width: 32%; }
-.sol-price-card th, .sol-price-card td {
-  padding: 12px 0;
-  border-top: 1px solid rgba(33, 17, 42, 0.16);
-  vertical-align: baseline;
-  font-size: 15px;
-}
-.sol-price-card th { font-weight: 600; text-align: left; padding-right: 12px; }
-.sol-price-card td {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-}
-.sol-price-note { margin-top: 12px; font-size: 13px; line-height: 1.45; }
 .sol-visit ol { list-style: none; margin: 16px 0 0; padding: 0; }
 .sol-visit li {
   display: grid;
@@ -466,11 +428,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  background: var(--cta);
-  color: var(--cta-ink);
-  font-size: 14px;
-  font-weight: 700;
+  font: var(--type-control);
 }
 
 .sol-faq-list { margin-top: 8px; }
@@ -504,10 +462,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   padding: 0 16px;
   text-decoration: none;
 }
-.sol-line-btn {
-  border: 1px solid rgba(223, 179, 250, 0.5);
-  color: var(--text);
-}
+.sol-line-btn { background: rgba(36, 23, 44, .4); color: var(--text); }
 .sol-phone { color: var(--cta); justify-content: flex-start; padding-inline: 4px; }
 
 .article-contact {
@@ -516,11 +471,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   margin-bottom: 12px;
 }
 .article-contact p { color: var(--muted); max-width: 36em; }
-.whatsapp-link {
-  background: var(--cta);
-  color: var(--cta-ink);
-  font-weight: 700;
-}
 
 .site-footer {
   display: flex;
@@ -539,7 +489,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   display: flex;
   gap: 8px;
   padding: 9px max(16px, env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
-  border-top: 1px solid #7c3f8b;
+  border-top: 1px solid #7c597f;
   background: rgba(22, 8, 28, .97);
   backdrop-filter: blur(18px);
 }
@@ -552,11 +502,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
   text-align: center;
   text-decoration: none;
 }
-.sol-dock-prices { flex: 0 1 44%; border: 1.5px solid #f8e3ff; color: var(--text); background: rgba(32, 11, 39, .68); }
-.sol-dock-book, .service-primary.sol-dock-book { flex: 1 1 56%; background: var(--lilac-sheen); color: var(--cta-ink); font-weight: 700; }
+.sol-dock-prices { flex: 0 1 42%; color: var(--text); background: rgba(32, 18, 39, .8); }
+.sol-dock-book { flex: 1 1 58%; }
 @media (max-width: 359px) {
   :root { --gutter: 16px; }
-  .sol-switch button { font-size: 14px; }
 }
 
 @media (min-width: 560px) and (max-width: 959px) {
@@ -565,46 +514,40 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 479px) and (max-height: 740px) and (orientation: portrait) {
-  .sol-stage {
-    height: min(clamp(466px, 155vw, 610px), max(420px, calc(100svh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px))));
-    padding-bottom: 12px;
+  .sol-hero {
+    --scene-height: min(clamp(27.75rem, 148vw, 38.125rem), max(26.25rem, calc(100svh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px))));
   }
   .sol-frame picture { top: clamp(14px, calc(100svh - 555px), 61px); }
 }
 
 @media (orientation: landscape) and (max-width: 959px) and (max-height: 500px) {
   .sol-hero {
-    --landscape-scene: clamp(190px, calc(100svh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px)), 410px);
+    --scene-height: clamp(11.875rem, calc(100svh - var(--header) - var(--dock) - env(safe-area-inset-bottom, 0px)), 25.625rem);
+    --scene-travel: clamp(9rem, 44svh, 14rem);
   }
-  .sol-hero-copy { align-self: center; padding-top: 0; padding-bottom: 60px; }
-  .sol-hero h1 { font-size: clamp(39px, 7vw, 66px); }
-  .service-lead { font-size: 18px; }
-  .sol-stage {
-    height: var(--landscape-scene);
-    align-items: flex-end;
-    padding-bottom: 15px;
-  }
+  .sol-hero-copy { align-self: center; padding-top: 0; padding-bottom: 2rem; }
+  .sol-hero h1 { font-size: clamp(2.4375rem, 7vw, 4.125rem); }
+  .service-lead { font-size: 1.125rem; }
   .sol-frame picture {
     top: auto;
-    bottom: calc(var(--landscape-scene) * -.055);
+    bottom: calc(var(--scene-height) * -.055);
     left: auto;
     right: 0;
-    width: min(68%, calc(var(--landscape-scene) * 1.42));
+    width: min(68%, calc(var(--scene-height) * 1.42));
   }
   .sol-frame picture img { max-height: none; }
   .sol-frame > img { top: 0; left: auto; right: 0; width: 69%; height: 100%; mask-image: none; }
-  .sol-frame::after, .sol-frame.is-detail::after {
+  .sol-frame::after {
     background: linear-gradient(90deg, #17091d 21%, #17091de1 34%, transparent 61%),
       linear-gradient(0deg, #200b27 1%, transparent 31%);
   }
-  .sol-switch { width: min(55%, 330px); }
 }
 
 @media (min-width: 960px) {
   :root { --dock: 0px; --gutter: clamp(44px, 6vw, 108px); --header: calc(72px + env(safe-area-inset-top, 0px)); }
   body.sol-page { padding-bottom: 32px; }
   .sol-header { padding-inline: var(--safe-left) var(--safe-right); }
-  .sol-brand { font-size: clamp(19px, 2vw, 27px); }
+  .sol-brand { font-size: clamp(1.1875rem, 2vw, 1.5625rem); }
   .sol-ready .sol-menu-btn { display: none; }
   .sol-nav, .sol-ready .sol-nav, .sol-ready .sol-nav.is-open {
     display: flex;
@@ -618,36 +561,30 @@ button, a { -webkit-tap-highlight-color: transparent; }
     border: 0;
     background: transparent;
   }
-  .sol-nav .sol-nav-cta { padding: 0 19px; justify-content: center; background: var(--lilac-sheen); color: var(--cta-ink); }
-  .sol-hero { background: radial-gradient(ellipse at 65% 36%, #411344, transparent 65%), #17091d; }
+  .sol-hero {
+    --scene-height: clamp(36rem, 54vw, 47rem);
+    --scene-travel: clamp(20rem, 52svh, 30rem);
+  }
+  .sol-hero-scene { background: radial-gradient(ellipse at 65% 36%, #411344, transparent 65%), #17091d; }
   .sol-hero-copy { align-self: center; max-width: 1480px; width: 100%; margin-inline: auto; padding-top: 0; padding-bottom: 74px; }
-  .sol-hero h1 { font-size: clamp(74px, 8.3vw, 132px); }
-  .service-lead { font-size: clamp(21px, 2.1vw, 29px); margin-top: 16px; }
-  .sol-stage { height: clamp(595px, 55vw, 765px); align-items: flex-end; padding-bottom: 34px; padding-right: clamp(85px, 13vw, 250px); }
+  .sol-hero h1 { font-size: clamp(4.625rem, 8.3vw, 8.25rem); }
+  .service-lead { font-size: clamp(1.25rem, 1.8vw, 1.65rem); margin-top: 1rem; }
   .sol-frame picture { width: min(72%, 1140px); left: auto; right: 0; top: auto; bottom: -8vw; }
   .sol-frame picture img { width: 100%; height: auto; }
   .sol-frame > img { top: 3%; left: auto; right: 0; width: 76%; height: 99%; mask-image: none; }
-  .sol-frame::after, .sol-frame.is-detail::after {
+  .sol-frame::after {
     background: linear-gradient(90deg, #17091d 4%, #17091d 26%, rgba(23, 9, 29, .74) 38%, transparent 62%),
       linear-gradient(0deg, #200b27 1%, transparent 32%);
   }
-  .sol-view-error { width: min(100%, 330px); }
   .sol-dock { display: none; }
   .site-footer { max-width: 1480px; margin-inline: auto; }
 }
 
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .sol-frame picture, .sol-frame > img {
-    transform: translate(var(--sol-shift-x, 0), var(--sol-shift-y, 0));
-    transition: transform 320ms ease-out;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
 
 .sol-lower-fix {
-  --lower-lilac: #edc5f3;
   --lower-line: #ac6dba87;
   --lower-edge: #22102c;
   max-width: 1240px;
@@ -661,9 +598,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .sol-section h2 {
-  font-size: clamp(37px, 10.3vw, 58px);
-  line-height: .96;
-  letter-spacing: -.038em;
+  font-size: clamp(2.25rem, 9.9vw, 3.625rem);
+  line-height: 1.06;
+  letter-spacing: -.025em;
 }
 
 .sol-lower-fix .sol-studio {
@@ -674,96 +611,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-lower-fix .sol-studio p {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 14px;
-}
-
-.sol-lower-fix .sol-prices {
-  gap: 0;
-  padding-top: 0;
-}
-
-.sol-lower-fix .sol-prices-photo {
-  position: relative;
-  min-width: 0;
-  height: clamp(166px, 53vw, 361px);
-  margin-inline: calc(var(--safe-left) * -1) calc(var(--safe-right) * -1);
-  overflow: hidden;
-}
-
-.sol-lower-fix .sol-prices-photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 49%;
-}
-
-.sol-lower-fix .sol-prices-photo::after {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, var(--bg) 0%, transparent 15%, transparent 83%, var(--bg) 100%);
-  content: "";
-}
-
-.sol-lower-fix .sol-price-content {
-  position: relative;
-  min-width: 0;
-  padding-top: 12px;
-}
-
-.sol-lower-fix .sol-price-card {
-  margin-top: 14px;
-  padding: 7px 16px;
-  border: 1px solid #f8d8ffd2;
-  border-radius: 16px;
-  background:
-    radial-gradient(70% 12% at 45% 0%, #fff2ffce, transparent 100%),
-    linear-gradient(160deg, #f1cffa 0%, #e7acef 57%, #d791e9 100%);
-  box-shadow: inset 0 1px 0 #fff8ff82, 0 13px 31px #11071577;
-  color: #24102d;
-}
-
-.sol-lower-fix .sol-price-card table {
-  margin: 0;
-  table-layout: auto;
-}
-
-.sol-lower-fix .sol-price-card th,
-.sol-lower-fix .sol-price-card td {
-  padding-block: 9px;
-  border-top: 1px solid #601d7280;
-  font-size: clamp(14px, 4.3vw, 20px);
-  line-height: 1.25;
-}
-
-.sol-lower-fix .sol-price-card tr:first-child > * {
-  border-top: 0;
-}
-
-.sol-lower-fix .sol-price-card th {
-  width: auto;
-  padding-inline-end: 8px;
-  font-weight: 700;
-}
-
-.sol-lower-fix .sol-price-card th span {
-  font-size: .83em;
-  font-weight: 500;
-}
-
-.sol-lower-fix .sol-price-card td {
-  width: 1%;
-}
-
-.sol-lower-fix .sol-price-note {
-  margin-top: 9px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.sol-lower-fix .sol-price-note a {
-  text-underline-offset: 3px;
+  font-size: .9375rem;
 }
 
 .sol-lower-fix .sol-visit {
@@ -793,8 +641,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .sol-visit li::before {
-  background: linear-gradient(170deg, #f1ccff, #ce92e3);
-  box-shadow: inset 0 1px 0 #fff9;
+  border: 1px solid #b696bb83;
+  border-radius: 7px;
+  background: #281b31;
+  color: #f4ddf7;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .sol-lower-fix .sol-lower-divider {
@@ -831,7 +683,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-lower-fix .sol-faq-list summary {
   min-height: 45px;
   padding: 8px 3px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .sol-lower-fix .sol-faq-list summary::after {
@@ -867,13 +719,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .sol-lower-fix .sol-business {
   margin-top: 0;
   color: var(--muted);
-  font-size: 12px;
+  font: var(--type-note);
 }
 
 .sol-lower-fix .sol-location address {
   margin-top: 4px;
-  font-size: 15px;
-  line-height: 1.46;
+  font-size: .9375rem;
+  line-height: 1.52;
 }
 
 .sol-lower-fix .sol-location-actions {
@@ -882,49 +734,33 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .sol-location-actions :is(.sol-line-btn, .whatsapp-link) {
-  gap: 10px;
+  justify-content: flex-start;
+  gap: .75rem;
   width: 100%;
   min-width: 0;
-  min-height: 47px;
-  padding-block: 6px;
-  border: 1px solid #ebc3f9;
-  border-radius: 999px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.sol-lower-fix .sol-location-actions .sol-line-btn:hover {
-  background: #e2aafa22;
+  min-height: 50px;
+  padding: .625rem .9375rem;
+  text-align: start;
 }
 
 .sol-lower-fix .sol-location-actions svg {
-  flex: 0 0 23px;
-  width: 23px;
-  height: 23px;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .sol-lower-fix .sol-location-actions small {
   display: block;
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--muted);
-  font-size: 10px;
-  font-weight: 500;
+  font: var(--type-note);
+  font-variant-numeric: tabular-nums;
 }
 
 .sol-lower-fix .article-contact {
   display: block;
   margin: 0;
   padding: 0;
-}
-
-.sol-lower-fix .article-contact .whatsapp-link {
-  background: var(--lilac-sheen);
-  color: #21102a;
-  box-shadow: inset 0 1px 0 #fff9;
-}
-
-.sol-lower-fix .article-contact .whatsapp-link:hover {
-  background: var(--lower-lilac);
 }
 
 .sol-lower-fix .sol-lower-end {
@@ -938,17 +774,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 359px) {
-  .sol-lower-fix .sol-price-card {
-    padding-inline: 12px;
-  }
-
-  .sol-lower-fix .sol-price-card th,
-  .sol-lower-fix .sol-price-card td {
-    font-size: 14px;
-  }
-
   .sol-lower-fix .sol-section h2 {
-    font-size: 35px;
+    font-size: 2.1875rem;
   }
 }
 
@@ -956,22 +783,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .sol-lower-fix .sol-studio {
     padding-top: 41px;
     padding-bottom: 23px;
-  }
-
-  .sol-lower-fix .sol-prices {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
-    gap: 18px 42px;
-  }
-
-  .sol-lower-fix .sol-prices-photo {
-    grid-column: 1 / -1;
-    margin-inline: 0;
-    border-radius: 18px;
-  }
-
-  .sol-lower-fix .sol-visit {
-    padding-top: 12px;
-    margin: 0;
   }
 
   .sol-lower-fix .sol-faq,
@@ -998,5 +809,164 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
   .sol-lower-fix .sol-lower-end {
     margin-top: 44px;
+  }
+}
+
+.sol-lower-fix .sol-prices {
+  --price-edge: #a084ae;
+  --price-muted: #dbc3e3;
+  --price-rule: #6d4f797a;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 23px;
+  align-items: start;
+  padding-top: clamp(10px, 2.8vw, 34px);
+}
+
+.sol-lower-fix .sol-prices .sol-price-content {
+  min-width: 0;
+  padding-top: 0;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: 14px;
+  padding: 0;
+  border: 1px solid #695373;
+  border-radius: 17px;
+  background: #261731;
+  box-shadow: inset 0 -1px 0 #130b18, 0 13px 38px #10081952;
+  color: #fff5fc;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, #796581, #eaddf0 37%, var(--price-edge) 65%, #796581);
+  pointer-events: none;
+  content: "";
+}
+
+.sol-lower-fix .sol-prices .sol-prices-photo {
+  min-width: 0;
+  height: clamp(6.25rem, 30vw, 10rem);
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #87718d;
+  overflow: hidden;
+  background: #170e20;
+}
+
+.sol-lower-fix .sol-prices .sol-prices-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+}
+
+.sol-lower-fix .sol-prices .sol-prices-photo::after {
+  content: none;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card table {
+  width: calc(100% - 32px);
+  margin: 0 16px;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-family: var(--sans, Manrope, sans-serif);
+}
+
+.sol-lower-fix .sol-prices .sol-price-card tr + tr {
+  border-top: 1px solid var(--price-rule);
+}
+
+.sol-lower-fix .sol-prices .sol-price-card th,
+.sol-lower-fix .sol-prices .sol-price-card td {
+  padding-block: 13px;
+  border: 0;
+  vertical-align: middle;
+  line-height: 1.15;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card th {
+  width: auto;
+  padding-inline-end: 8px;
+  text-align: start;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card td {
+  width: 1%;
+  text-align: end;
+  white-space: nowrap;
+  font-size: clamp(1.25rem, 5vw, 1.8125rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.025em;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card .sol-price-payment,
+.sol-lower-fix .sol-prices .sol-price-card .sol-price-currency {
+  color: var(--price-muted);
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.sol-lower-fix .sol-prices .sol-price-card .sol-price-payment {
+  display: block;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+.sol-lower-fix .sol-prices .sol-price-note {
+  margin-top: 10px;
+  color: var(--muted, #dfcee7);
+  font-size: .8125rem;
+  line-height: 1.55;
+}
+
+.sol-lower-fix .sol-prices .sol-price-note a {
+  text-underline-offset: 3px;
+}
+
+.sol-lower-fix .sol-prices .sol-visit {
+  margin-top: 0;
+}
+
+@media (max-width: 359px) {
+  .sol-lower-fix .sol-prices .sol-price-card table {
+    width: calc(100% - 26px);
+    margin-inline: 13px;
+  }
+}
+
+@media (min-width: 960px) {
+  .sol-lower-fix .sol-prices {
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr);
+    gap: 34px clamp(35px, 6vw, 86px);
+  }
+
+  .sol-lower-fix .sol-prices .sol-prices-photo {
+    height: clamp(148px, 13vw, 190px);
+  }
+
+  .sol-lower-fix .sol-prices .sol-prices-photo img {
+    object-position: center 28%;
+  }
+
+  .sol-lower-fix .sol-prices .sol-visit {
+    padding-top: 0;
+  }
+
+  .sol-lower-fix .sol-prices .sol-price-card table {
+    width: calc(100% - 44px);
+    margin-inline: 22px;
   }
 }

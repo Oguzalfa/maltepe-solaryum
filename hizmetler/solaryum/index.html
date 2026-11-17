@@ -26,8 +26,8 @@
 <meta name="twitter:image:alt" content="Mor ışıklı, açık kapaklı yatay solaryum cihazı">
 <link rel="preload" as="image" href="/assets/solaryum/yatay-cihaz-mobil.webp" media="(max-width: 959px)" fetchpriority="high">
 <link rel="preload" as="image" href="/assets/solaryum/yatay-cihaz.webp" media="(min-width: 960px)" fetchpriority="high">
-<link rel="stylesheet" href="/hizmetler/solaryum/solaryum.css?v=mor5">
-<link rel="stylesheet" href="/booking.css?v=mor3">
+<link rel="stylesheet" href="/hizmetler/solaryum/solaryum.css?v=studio1">
+<link rel="stylesheet" href="/booking.css?v=studio1">
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -95,33 +95,26 @@
     <a href="#sorular">Sık Sorulanlar</a>
     <a href="#konum">Konum</a>
     <a href="#randevu">Randevu</a>
-    <a class="sol-nav-cta" data-booking-trigger data-booking-service="Solaryum" href="https://wa.me/905356276563?text=Merhaba%2C%20Maltepe%20Solaryum%20i%C3%A7in%20randevu%20bilgisi%20almak%20istiyorum.">Randevu Al</a>
+    <a class="sol-nav-cta" data-booking-trigger data-booking-service="Solaryum" href="https://wa.me/905356276563?text=Merhaba%2C%20Maltepe%20Solaryum%20i%C3%A7in%20randevu%20bilgisi%20almak%20istiyorum.">Randevu Al <svg class="sol-action-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </nav>
 </header>
 <main id="icerik">
-  <section class="sol-hero" aria-labelledby="sol-h1">
-    <div class="sol-hero-copy">
-      <h1 id="sol-h1">Maltepe <em>Solaryum</em></h1>
-      <p class="service-lead">Altayçeşme, Maltepe</p>
+  <section class="sol-hero" data-sol-scene aria-labelledby="sol-h1">
+    <div class="sol-hero-scene">
+      <div class="sol-hero-copy">
+        <h1 id="sol-h1">Maltepe <em>Solaryum</em></h1>
+        <p class="service-lead">Altayçeşme, Maltepe</p>
+      </div>
+      <figure class="sol-stage">
+        <div class="sol-frame">
+          <picture class="sol-frame-overview">
+            <source media="(min-width: 960px)" srcset="/assets/solaryum/yatay-cihaz.webp" width="1122" height="1402">
+            <img src="/assets/solaryum/yatay-cihaz-mobil.webp" width="780" height="975" alt="Mor ışıklı stüdyoda açık kapaklı yatay solaryum cihazı" fetchpriority="high" decoding="async">
+          </picture>
+          <img class="sol-frame-detail" src="/assets/solaryum/isik-detayi.webp" width="980" height="653" alt="" decoding="async" fetchpriority="low">
+        </div>
+      </figure>
     </div>
-    <figure class="sol-stage" data-sol-gallery>
-      <div class="sol-frame" data-sol-frame>
-        <picture data-sol-view="genel">
-          <source media="(min-width: 960px)" srcset="/assets/solaryum/yatay-cihaz.webp" width="1122" height="1402">
-          <img src="/assets/solaryum/yatay-cihaz-mobil.webp" width="780" height="975" alt="Mor ışıklı stüdyoda açık kapaklı yatay solaryum cihazı" fetchpriority="high" decoding="async">
-        </picture>
-        <img data-sol-view="detay" hidden src="/assets/solaryum/isik-detayi.webp" width="980" height="653" alt="Yatay solaryum kabinindeki mor ışıkların yakın görünümü" decoding="async">
-        <p class="sol-fallback" data-sol-fallback hidden>Solaryum kabini görseli yüklenemedi.</p>
-      </div>
-      <div class="sol-switch" role="group" aria-label="Solaryum kabini görünümleri" hidden>
-        <button type="button" data-sol-choice="genel" aria-pressed="true">Genel görünüm</button>
-        <button type="button" data-sol-choice="detay" aria-pressed="false">Işık detayı</button>
-      </div>
-      <p class="sol-sr" data-sol-live aria-live="polite"></p>
-      <p class="sol-view-error" data-sol-error hidden>
-        <span>Işık detayı yüklenemedi.</span>
-      </p>
-    </figure>
   </section>
 
   <div class="sol-lower-fix">
@@ -131,17 +124,26 @@
     </section>
 
     <section class="sol-section sol-prices" aria-labelledby="seans-baslik">
-      <figure class="sol-prices-photo">
-        <img src="/assets/solaryum/isik-detayi.webp" width="980" height="653" alt="Yatay solaryum kabinindeki mor ışıkların yakın görünümü" loading="lazy" decoding="async">
-      </figure>
       <div class="sol-price-content" id="seans">
         <h2 id="seans-baslik">Seans fiyatları</h2>
         <div class="sol-price-card">
+          <figure class="sol-prices-photo">
+            <img src="/assets/solaryum/isik-detayi.webp" width="980" height="653" alt="Yatay solaryum kabininin krom çerçevesi ve mor ışık tüpleri" loading="lazy" decoding="async">
+          </figure>
           <table aria-labelledby="seans-baslik" aria-describedby="sol-price-source">
             <tbody>
-              <tr><th scope="row">1 dakika</th><td>35 TL</td></tr>
-              <tr><th scope="row">100 dakika <span>(nakit)</span></th><td>3.000 TL</td></tr>
-              <tr><th scope="row">100 dakika <span>(kart / IBAN)</span></th><td>3.500 TL</td></tr>
+              <tr>
+                <th scope="row">1 dakika</th>
+                <td>35 <span class="sol-price-currency">TL</span></td>
+              </tr>
+              <tr>
+                <th scope="row">100 dakika <span class="sol-price-payment">Nakit</span></th>
+                <td>3.000 <span class="sol-price-currency">TL</span></td>
+              </tr>
+              <tr>
+                <th scope="row">100 dakika <span class="sol-price-payment">Kart / IBAN</span></th>
+                <td>3.500 <span class="sol-price-currency">TL</span></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -221,9 +223,9 @@
 </footer>
 <div class="sol-dock" data-sol-dock>
   <a class="sol-dock-prices" href="#seans">Fiyatlar</a>
-  <a class="service-primary sol-dock-book" data-booking-trigger data-booking-service="Solaryum" href="https://wa.me/905356276563?text=Merhaba%2C%20Maltepe%20Solaryum%20i%C3%A7in%20randevu%20bilgisi%20almak%20istiyorum.">Randevu Al</a>
+  <a class="service-primary sol-dock-book" data-booking-trigger data-booking-service="Solaryum" href="https://wa.me/905356276563?text=Merhaba%2C%20Maltepe%20Solaryum%20i%C3%A7in%20randevu%20bilgisi%20almak%20istiyorum.">Randevu Al <svg class="sol-action-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 <script type="module" src="/js/booking-bootstrap.js?v=mor2"></script>
-<script type="module" src="/hizmetler/solaryum/solaryum.js?v=mor3"></script>
+<script type="module" src="/hizmetler/solaryum/solaryum.js?v=studio1"></script>
 </body>
 </html>
