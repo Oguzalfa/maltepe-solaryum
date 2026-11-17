@@ -621,8 +621,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .sol-studio {
-  padding-top: 17px;
-  padding-bottom: 17px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.sol-lower-fix .sol-studio-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #70577a;
+  border-radius: 14px;
 }
 
 .sol-lower-fix .sol-studio p {
@@ -710,7 +721,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .sol-lower-fix .sol-location {
+  --location-band: clamp(62px, 16vw, 100px);
   margin-top: 23px;
+  padding-top: var(--location-band);
+}
+
+.sol-lower-fix .sol-location::before {
+  inset-inline: var(--safe-left) var(--safe-right);
+  height: var(--location-band);
+  transform: none;
+  border: 0;
+  border-radius: 12px 12px 0 0;
+  background: #26132c url("/assets/solaryum/konum-fume-cam.webp") center 54% / cover no-repeat;
+  box-shadow: none;
+  mask-image: linear-gradient(180deg, #000 38%, transparent 100%);
 }
 
 .sol-lower-fix .sol-location-info {
@@ -798,8 +822,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (min-width: 960px) {
   .sol-lower-fix .sol-studio {
+    grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(25px, 5vw, 66px);
     padding-top: 41px;
-    padding-bottom: 23px;
+    padding-bottom: 32px;
   }
 
   .sol-lower-fix .sol-faq,
@@ -816,6 +843,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .sol-lower-fix .sol-location {
     grid-template-columns: minmax(0, 1fr) minmax(280px, .75fr);
     align-items: center;
+    padding-top: var(--location-band);
   }
 
   .sol-lower-fix .sol-location-actions {
